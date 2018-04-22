@@ -7,7 +7,7 @@ const Navigation = () => {
 	return (
 		<div>
 			<nav className="navbar navbar-default">
-				<div className="container-fluid">
+				<div className="container">
 					<div className="navbar-header">
 						<NavLink className="navbar-brand" to="/">
 							Countries App
