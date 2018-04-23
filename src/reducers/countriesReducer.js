@@ -46,6 +46,14 @@ const countriesReducer = (state = initialState, action) => {
 				countries: noDeletedCountries,
 				visibleCountries: noDeletedVisibleCountries,
 			};
+		case constants.SET_CONTINENT:
+			const chooseContinet = state.countries.filter(
+				country => country.continent === action.payload.continentName
+			);
+			return {
+				...state,
+				visibleCountries: chooseContinet,
+			};
 		default:
 			return state;
 	}
