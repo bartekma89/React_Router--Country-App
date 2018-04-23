@@ -4,7 +4,7 @@ import * as constants from '../constants';
 const initialState = {
 	countries: countriesData,
 	country: {},
-	visibleCountries: [],
+	visibleCountries: countriesData,
 };
 
 const countriesReducer = (state = initialState, action) => {
@@ -32,6 +32,19 @@ const countriesReducer = (state = initialState, action) => {
 			return {
 				...state,
 				visibleCountries: foundCountries,
+			};
+		case constants.DELETE_COUNTRY:
+			const noDeletedCountries = state.countries.filter(
+				country => country.id !== action.payload.countryId
+			);
+			const noDeletedVisibleCountries = state.visibleCountries.filter(
+				country => country.id !== action.payload.countryId
+			);
+
+			return {
+				...state,
+				countries: noDeletedCountries,
+				visibleCountries: noDeletedVisibleCountries,
 			};
 		default:
 			return state;

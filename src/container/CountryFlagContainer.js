@@ -9,10 +9,14 @@ class CountryFlagContainer extends React.Component {
 		this.props.searchCountries('');
 	}
 
-	search(event) {
+	searchCountries(event) {
 		const value = event.target.value;
 
 		this.props.searchCountries(value);
+	}
+
+	deleteCountry(countryId, event) {
+		this.props.deleteCountry(countryId);
 	}
 
 	render() {
@@ -21,11 +25,14 @@ class CountryFlagContainer extends React.Component {
 				<div className="search text-center">
 					<input
 						type="text"
-						onChange={this.search.bind(this)}
+						onChange={this.searchCountries.bind(this)}
 						placeholder="Filter..."
 					/>
 				</div>
-				<CountryFlagList countries={this.props.visibleCountries} />
+				<CountryFlagList
+					countries={this.props.visibleCountries}
+					deleteCountry={this.deleteCountry.bind(this)}
+				/>
 			</div>
 		);
 	}
@@ -43,6 +50,7 @@ const mapDispatchToProps = dispatch => {
 		getCountries: () => dispatch(countriesAction.getCountries()),
 		searchCountries: filterText =>
 			dispatch(countriesAction.searchCountry(filterText)),
+		deleteCountry: id => dispatch(countriesAction.deleteCountry(id)),
 	};
 };
 

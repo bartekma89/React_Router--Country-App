@@ -14,6 +14,13 @@ const CountryFlagList = props => {
 						>
 							<CountryFlag country={country} />
 						</Link>
+						<button
+							className="btn btn-danger"
+							type="button"
+							onClick={props.deleteCountry.bind(this, country.id)}
+						>
+							Delete
+						</button>
 					</div>
 				);
 			})}
