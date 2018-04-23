@@ -4,18 +4,17 @@ import * as constants from '../constants';
 const initialState = {
 	countries: countriesData,
 	country: {},
+	visibleCountries: [],
 };
 
 const countriesReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case constants.GET_COUNTRIES:
-			console.log('get countries');
 			return {
 				...state,
 				countries: state.countries,
 			};
 		case constants.GET_COUNTRY:
-			console.log('get country');
 			const id = action.payload.countryId;
 			const foundCountry = state.countries.find(
 				country => country.id === parseInt(id, 10)
@@ -23,6 +22,16 @@ const countriesReducer = (state = initialState, action) => {
 			return {
 				...state,
 				country: foundCountry,
+			};
+		case constants.SEARCH_COUNTRIES:
+			console.log('search countries');
+			const filterText = action.payload.filterText;
+			const foundCountries = state.countries.filter(country =>
+				country.name.toLowerCase().includes(filterText)
+			);
+			return {
+				...state,
+				visibleCountries: foundCountries,
 			};
 		default:
 			return state;
